@@ -2,4 +2,39 @@
 
 #### [prev](./concepts.md) | [home](./welcome.md)  | [next](./topology.md)
 
-Details... Peering...
+## How does a virtual machine connect to the network?
+
+> Configure IP address and DNS settings outside of the VMs OS. Leave the VM to use DHCP (yes, even for NVAs).
+
+Subnets and other VNets
+- Connected by default.
+- A basic NSG provides minimum ingress/egress controls.
+
+Internet locations
+- NAT is performed by the networking fabric by-default.
+- A public IP is **NOT** needed for internet access.
+
+On-premises network
+- Via the internet.
+- Via a Gateway.
+
+## How do you connect to a virtual machine?
+
+Azure Bastion (or even via console)
+- RDP and SSH over HTTPS.
+- Secure, simple, effective.
+
+Via an on-premises connection
+- Connecting to the VM's private IP address.
+
+Via the internet
+- Requires a public IP on the Virtual Machine.
+
+## What are the basics?
+![VNet Reference](/png/basics.png)
+[Virtual network basics](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq)
+
+## What is VNet Peering?
+![Peering Reference](/png/peering.png)
+[Virtual network peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
+
