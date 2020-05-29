@@ -2,4 +2,7 @@
 
 #### [prev](./topology.md) | [home](./welcome.md)  | [next](./routing.md)
 
-Details...
+Options for connecting onprem to Azure
+
+1. Site-to-Site VPN
+2. ExpressRoute
