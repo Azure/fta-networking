@@ -22,5 +22,12 @@ If multiple routes contain the same address prefix, Azure selects the route type
 2. BGP route
 3. System route
 
-
+## User defined routes and next hop types
+You can create custom, or user-defined(static), routes in Azure to override Azure's default system routes, or to add additional routes to a subnet's route table. In Azure, you create a route table, then associate the route table to zero or more virtual network subnets.
+Following next hop types are available when creating user-defined route:
+* Virtual appliance
+* Virtual Network Gateway
+* None
+* Virtual Network
+* Internet
 
