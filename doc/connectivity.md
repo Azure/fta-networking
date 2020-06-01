@@ -5,7 +5,7 @@
 ## Connectivity between Azure Virtual Networks
 Use [Virtual network peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview), fundamental in hub and spoke model.
 
-Key points
+### Peering Key points
 * Cross Subscription, Tenant and Region Connectivty
 * Peering charge per gb
 * Peering is not transative without the use of NVA and UDR
@@ -15,19 +15,22 @@ Alternatives
 * S2S VPN
 * Shared ER Circuit
 
-## Connectivity to another network outside of Azure?
+![VNet Reference](/png/local-or-remote-gateway-in-peered-virtual-network.png)
+
+
+## Connectivity to another network outside of Azure
 if you need to communicate with services (using a private ip) in another network  there are a few options depending on what your requirements are:
 the two main options are
 * [VPN](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways)
 * [Express Route](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-introduction)
 
 The Azure Architecture center has a a great article comparing the two [here](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/) also review the gateway [planning table](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways#planningtable)
-## VPN key points
+### VPN key points
 * [SKU](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways#gwsku) - determines aggregate througput
 * Routing - Can use either [BGP](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-bgp-overview) or static routes using [Local Network Gateways](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-gateway-settings#lng)
 * expect provisioning to take 40-60 minutes
 
-## Express Route key points
+### Express Route key points
 * [Peering Locations](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-locations-providers) -  MSEE is not equal to an Azure Region
 * [Peering Types](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-circuit-peerings) - Microsoft and private, do i need 1 or the other or both?
 * [Routing Requirements](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-routing) - Public IP, ASN, etc
@@ -39,17 +42,17 @@ The Azure Architecture center has a a great article comparing the two [here](htt
 * [ExpressRoute Global Reach](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-global-reach)
 * [Coexistance of ER and VPN Gateways](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-howto-coexist-resource-manager)
 
-## Private Connectivity to PaaS Resources
+## Private connectivity to PaaS resources
 We recommend adopting strategies like Zero Trust and moving the focus from network perimeters to Identity. However not everyone or system can make this shift today. We have increasing support for private access to normally public services. There are a few different approaches to this:
 * [Dedicated Service](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-for-azure-services) - Deploy dedicated but managed infrastructure inside your VNET e.g SQL Managed Instance or App Service Environment
-* [Service Endpoint](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview) - Allow ACLd Access to a public endpoint, firewall other access. Not Accessible from remote networks
-* [Private Endpoints](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview) - Provision private ip address in the virtual network that will enable access to public resource
+* [Service Endpoint](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview) - Allow ACLd Access to a public endpoint, firewall other access. Not accessible from remote networks
+* [Private Endpoints](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview) - Provision private ip address in the virtual network that will enable access to public resource. Not supported for all services see [Availbilty](https://docs.microsoft.com/en-us/azure/private-link/private-link-overview#availability)
 
 
-OPINION: relying heavily on these mechanisms will make integration increasingly difficult, Some services will have a loss of features when IP addresses are restricted. Remember many of the services where designed for a public cloud. examples include. Azure SQL Export Service, Managing some storage account settings from the Portal, using PowerBi to easily integrate with services
+OPINION: Relying heavily on these mechanisms will make integration increasingly difficult, some services will have a loss of features when IP addresses are restricted. Remember many of the services where designed for a public cloud. examples include: Azure SQL export service, managing some storage account settings from the portal, using PowerBI to easily integrate with services
 
 ## Alternatives to private connectivity
-you may not need a full hybrid network to support your workloads. Some services offer their own connectivity options which might be worth exploring if you only need connectivity for 1 or two solutions
+you may not need a full hybrid network to support your workloads. Some services offer their own connectivity options which might be worth exploring if you only need connectivity for 1 or two solutions. Examples:
 * [Azure Relay](https://docs.microsoft.com/en-us/azure/azure-relay/relay-what-is-it)
 * [Data Gateway](https://docs.microsoft.com/en-us/data-integration/gateway/service-gateway-onprem)
 * Exposing services using [Mutual Certificate Authentication](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-mutual-certificates)
