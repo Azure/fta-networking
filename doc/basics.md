@@ -25,16 +25,19 @@ Azure Bastion (or even via console)
 - Secure, simple, effective.
 
 Via an on-premises connection
-- Connecting to the VM's private IP address.
+- Connecting to the virtual machine's private IP address.
 
 Via the internet
-- Requires a public IP on the Virtual Machine.
+- Through an Application Gateway or Firewall.
+- Assigning a public IP to the virtual machine directly.
 
 ## What are the basics?
+
 ![VNet Reference](/png/basics.png)
 [Virtual network basics](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq)
 
 ## What is VNet Peering?
+
 ![Peering Reference](/png/peering.png)
 [Virtual network peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
 
