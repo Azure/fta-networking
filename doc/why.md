@@ -2,7 +2,7 @@
 
 #### [prev](./welcome.md) | [home](./welcome.md)  | [next](./concepts.md)
 
-## Networking in Azure is defined virtually
+## Networking in Azure is defined virtually (what is this "Fabric" I keep hearing about)
 
 This means networking concepts learnt traditionally don't always apply.
 
