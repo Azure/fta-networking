@@ -14,6 +14,5 @@ Agenda
 1. [Routing](./routing.md)
 1. [Security](./security.md)
 1. [Management](./mgmt.md)
-1. [Resources](./resources.md)
 1. [QnA](./faq.md)
 

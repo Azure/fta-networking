@@ -1,6 +1,6 @@
 # Frequently Asked Questions
 
-#### [prev](./resources.md) | [home](./welcome.md)  | [next](./welcome.md)
+#### [prev](./mgmt.md) | [home](./welcome.md)  | [next](./welcome.md)
 
 - [Azure Virtual Network FAQ](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq)
 - [Azure Firewall FAQ](https://docs.microsoft.com/en-us/azure/firewall/firewall-faq)

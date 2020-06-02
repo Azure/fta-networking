@@ -1,6 +1,6 @@
 # Management
 
-#### [prev](./security.md) | [home](./welcome.md)  | [next](./resources.md)
+#### [prev](./security.md) | [home](./welcome.md)  | [next](./faq.md)
 
 ## Azure Network Watcher
 
