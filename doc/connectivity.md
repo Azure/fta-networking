@@ -26,6 +26,7 @@ the two main options are
 
 The Azure Architecture center has a a great article comparing the two [here](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/) also review the gateway [planning table](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways#planningtable)
 ### VPN key points
+* [Devices](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-devices) - validated devices and supported IPSec/IKE settings
 * [SKU](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways#gwsku) - determines aggregate througput
 * Routing - Can use either [BGP](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-bgp-overview) or static routes using [Local Network Gateways](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-gateway-settings#lng)
 * expect provisioning to take 40-60 minutes
