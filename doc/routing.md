@@ -3,11 +3,11 @@
 #### [prev](./connectivity.md) | [home](./welcome.md)  | [next](./security.md)
 
 ## Route types in Azure
-* [System Routes] https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview
-* [Custom Routes] https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview
+* [System Routes](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview)
+* [Custom Routes](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview)
 
 Azure automatically creates system routes and assigns the routes to each subnet in a virtual network. 
-Custom routes can be created either manaully i.e. [user-defined] https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#user-defined or by exchanging border gateway protocol (BGP) routes between your on-premises network gateway and an Azure virtual network gateway.
+Custom routes can be created either manaully i.e. [user-defined](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview#user-defined) or by exchanging border gateway protocol (BGP) routes between your on-premises network gateway and an Azure virtual network gateway.
 ## BGP and Azure networking
 An on-premises network gateway can exchange routes with an Azure virtual network gateway using the border gateway protocol (BGP). Using BGP with an Azure virtual network gateway is dependent on the type you selected when you created the gateway. If the type you selected were:
 
@@ -31,3 +31,4 @@ Following next hop types are available when creating user-defined route:
 * Virtual Network
 * Internet
 
+![Routing Reference](/png/routing.png)
