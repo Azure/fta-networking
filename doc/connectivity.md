@@ -9,7 +9,7 @@ Use [Virtual network peering](https://docs.microsoft.com/en-us/azure/virtual-net
 * Cross Subscription, Tenant and Region Connectivty
 * Peering charge per gb
 * Peering is not transative without the use of NVA and UDR
-* limitations with basic load balancers and some services see [Requirements and constraints](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering#requirements-and-constraints) for more detail
+* Limitations with basic load balancers and some services see [Requirements and constraints](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering#requirements-and-constraints) for more detail
 
 Alternatives
 * S2S VPN
@@ -19,7 +19,7 @@ Alternatives
 
 
 ## Connectivity to another network outside of Azure
-if you need to communicate with services (using a private ip) in another network  there are a few options depending on what your requirements are:
+If you need to communicate with services (using a private ip) in another network  there are a few options depending on what your requirements are:
 the two main options are
 * [VPN](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways)
 * [Express Route](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-introduction)
@@ -29,7 +29,7 @@ The Azure Architecture center has a a great article comparing the two [here](htt
 * [Devices](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-devices) - validated devices and supported IPSec/IKE settings
 * [SKU](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways#gwsku) - determines aggregate througput
 * Routing - Can use either [BGP](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-bgp-overview) or static routes using [Local Network Gateways](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-gateway-settings#lng)
-* expect provisioning to take 40-60 minutes
+* Expect provisioning to take 40-60 minutes
 
 ### Express Route key points
 * [Peering Locations](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-locations-providers) -  MSEE is not equal to an Azure Region
@@ -50,10 +50,16 @@ We recommend adopting strategies like Zero Trust and moving the focus from netwo
 * [Private Endpoints](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview) - Provision private ip address in the virtual network that will enable access to public resource. Not supported for all services see [Availbilty](https://docs.microsoft.com/en-us/azure/private-link/private-link-overview#availability)
 
 
-OPINION: Relying heavily on these mechanisms will make integration increasingly difficult, some services will have a loss of features when IP addresses are restricted. Remember many of the services where designed for a public cloud. examples include: Azure SQL export service, managing some storage account settings from the portal, using PowerBI to easily integrate with services
+OPINION: 
+>Relying heavily on these mechanisms will make integration increasingly difficult, some services will have a loss of features when IP addresses are restricted. Remember many of the services were designed for a public cloud. Examples:
+>* [Azure SQL import/export service](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview#allow-azure-services)
+>* Managing some storage account settings from the portal [Storage Recommendations](https://docs.microsoft.com/en-us/azure/storage/blobs/security-recommendations#networking)
+>* Using PowerBI to easily integrate with data services
 
 ## Alternatives to private connectivity
-you may not need a full hybrid network to support your workloads. Some services offer their own connectivity options which might be worth exploring if you only need connectivity for 1 or two solutions. Examples:
+You may not need a full hybrid network to support your workloads. Some services offer their own connectivity options which might be worth exploring if you only need connectivity for 1 or two solutions. 
+
+Examples:
 * [Azure Relay](https://docs.microsoft.com/en-us/azure/azure-relay/relay-what-is-it)
 * [Data Gateway](https://docs.microsoft.com/en-us/data-integration/gateway/service-gateway-onprem)
 * Exposing services using [Mutual Certificate Authentication](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-mutual-certificates)
