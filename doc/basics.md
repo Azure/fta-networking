@@ -18,6 +18,8 @@ On-premises network
 - Via the internet.
 - Via a Gateway.
 
+More information for [Outbound connection (flows)](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-outbound-connections)
+
 ## How do you connect to a virtual machine?
 
 Azure Bastion (or even via console)
