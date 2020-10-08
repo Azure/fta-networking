@@ -44,3 +44,5 @@ https://docs.microsoft.com/en-us/azure/virtual-network/ddos-protection-overview
 ## Azure Firewall
 Azure Firewall is a managed, cloud-based network security service that protects your Azure Virtual Network resources. It's a fully stateful firewall as a service with built-in high availability and unrestricted cloud scalability.
 https://docs.microsoft.com/en-us/azure/firewall/overview
+
+## WAF
