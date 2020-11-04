@@ -78,4 +78,4 @@ Private Link
 - You are responsible for the hosting the DNS name and correct name resolution.
 
 ## WAF
-Web application firewall is used in context with an Application Gateway or an xx?
+Web application firewall is used in context with an Application Gateway or Azure Front Door?
