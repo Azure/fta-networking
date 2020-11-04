@@ -12,6 +12,7 @@ Icon | Short Name | Full Name
 ![nva icon](/svg/azurefirewalls.svg)         | NVA | Network Virtual Appliance
 ![gw icon](/svg/virtualnetworkgateways.svg)  | GW | Gateway
 ![gw icon](/svg/publicipaddresses.svg)       | PIP | Public IP Address
+![waf icon](/svg/webapplicationfirewall.svg) | WAF | Web Application Firewall
 
 ## VNet 
 A logical address space housing virtual subnets. 
@@ -76,3 +77,5 @@ Private Link
 - Associated to Azure services.
 - You are responsible for the hosting the DNS name and correct name resolution.
 
+## WAF
+Web application firewall is used in context with an Application Gateway or an xx?
