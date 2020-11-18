@@ -34,7 +34,7 @@ The Azure Architecture center has a a great article comparing the two [here](htt
 
 ### Express Route key points
 * [Peering Locations](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-locations-providers) -  MSEE is not equal to an Azure Region
-* [Peering Types](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-circuit-peerings) - Microsoft and private, do i need 1 or the other or both?
+* [Peering Types](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-circuit-peerings) - Microsoft and private, do I need 1 or the other or both?
 * [Routing Requirements](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-routing) - Public IP, ASN, etc
 * [High Availabililty](https://docs.microsoft.com/en-us/azure/expressroute/designing-for-high-availability-with-expressroute) - Path redundancy and first mile considerations
 * [Pricing](https://azure.microsoft.com/en-us/pricing/details/expressroute/) -  For private peering dont forget to take into account circuit, gateway, egress and carrier charges.
