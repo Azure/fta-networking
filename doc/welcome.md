@@ -7,7 +7,9 @@
 
 **Slideless** No PowerPoint, we promise! As we update this content you will get the changes straight away.
 
-Please give us your feedback on https://aka.ms/ftalive-net-feedback
+**Feeback** We would love to hear your thoughts, please provide us your feedback [//aka.ms/ftalive](https://aka.ms/ftalive).
+
+![Feedback screenshot](/png/feedback.png)
 
 Agenda
 1. [Why should we talk about networking?](./why.md)
