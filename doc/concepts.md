@@ -1,6 +1,5 @@
-# Concepts
-
-#### [prev](./why.md) | [home](./welcome.md)  | [next](./basics.md)
+,# Concepts
+ or Azure CDN. #### [prev](./why.md) | [home](./welcome.md)  | [next](./basics.md)
 
 Icon | Short Name | Full Name
 --|--|--
@@ -77,5 +76,8 @@ Private Link
 - Associated to Azure services.
 - You are responsible for the hosting the DNS name and correct name resolution.
 
-## WAF
-Web application firewall is used in context with an Application Gateway or Azure Front Door?
+ ## WAF
+- Web application firewall is used in context with an Application Gateway, Azure Front Door or Azure CDN.
+- WAF provides centralized protection of your web applications from common exploits and vulnerabilities.
+- Deployed at MS Edge locations to get global protection at scale, without sacrificing performance.
+
