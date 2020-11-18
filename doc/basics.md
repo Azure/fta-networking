@@ -38,8 +38,3 @@ Via the internet
 ![VNet Reference](/png/basics.png)
 [Virtual network basics](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-faq)
 
-## What is VNet Peering?
-
-![Peering Reference](/png/peering.png)
-[Virtual network peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
-
