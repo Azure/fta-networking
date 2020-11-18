@@ -17,7 +17,6 @@ Alternatives
 
 ![VNet Reference](/png/local-or-remote-gateway-in-peered-virtual-network.png)
 
-
 ## Connectivity to another network outside of Azure
 If you need to communicate with services (using a private ip) in another network  there are a few options depending on what your requirements are:
 the two main options are
@@ -25,10 +24,12 @@ the two main options are
 * [Express Route](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-introduction)
 
 The Azure Architecture center has a a great article comparing the two [here](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/) also review the gateway [planning table](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways#planningtable)
+
 ### VPN key points
 * [Devices](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-devices) - validated devices and supported IPSec/IKE settings
 * [SKU](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways#gwsku) - determines aggregate througput
 * Routing - Can use either [BGP](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-bgp-overview) or static routes using [Local Network Gateways](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-gateway-settings#lng)
+* [Availability Design](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-highlyavailable)
 * Expect provisioning to take 40-60 minutes
 
 ### Express Route key points
@@ -48,7 +49,6 @@ We recommend adopting strategies like Zero Trust and moving the focus from netwo
 * [Dedicated Service](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-for-azure-services) - Deploy dedicated but managed infrastructure inside your VNET e.g SQL Managed Instance or App Service Environment
 * [Service Endpoint](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview) - Allow ACLd Access to a public endpoint, firewall other access. Not accessible from remote networks
 * [Private Endpoints](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview) - Provision private ip address in the virtual network that will enable access to public resource. Not supported for all services see [Availbilty](https://docs.microsoft.com/en-us/azure/private-link/private-link-overview#availability)
-
 
 OPINION: 
 >Relying heavily on these mechanisms will make integration increasingly difficult, some services will have a loss of features when IP addresses are restricted. Remember many of the services were designed for a public cloud. Examples:
