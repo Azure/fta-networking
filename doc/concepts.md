@@ -12,7 +12,7 @@ Icon | Short Name | Full Name
 ![nva icon](/svg/azurefirewalls.svg)         | NVA | Network Virtual Appliance
 ![gw icon](/svg/virtualnetworkgateways.svg)  | GW | Gateway
 ![gw icon](/svg/publicipaddresses.svg)       | PIP | Public IP Address
-![waf icon](/svg/webapplicationfirewall.svg) | WAF | Web Application Firewall
+![waf icon](/png/waf-icon.png) | WAF | Web Application Firewall
 
 ## VNet 
 A logical address space housing virtual subnets. 
