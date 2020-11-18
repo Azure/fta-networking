@@ -46,3 +46,4 @@ Azure Firewall is a managed, cloud-based network security service that protects 
 https://docs.microsoft.com/en-us/azure/firewall/overview
 
 ## WAF
+Azure native web application firewall (WAF) service that provides powerful protection for web apps.
