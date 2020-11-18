@@ -77,7 +77,7 @@ Private Link
 - You are responsible for the hosting the DNS name and correct name resolution.
 
  ## WAF
-- Web application firewall is used in context with an Application Gateway, Azure Front Door or Azure CDN.
-- WAF provides centralized protection of your web applications from common exploits and vulnerabilities.
-- Deployed at MS Edge locations to get global protection at scale, without sacrificing performance.
-
+ A Web Application Firewall in a PAAS Firewall which inspects requests on their way to an origin web server, and will block requests before they reach the server.
+- Web application firewall is used in context with an Application Gateway, Azure Front Door or Azure CDN (Preview).
+- WAF provides centralized protection of your web applications against a number of layer 7 attack types. These include SQL injection attacks, cross-site scripting attacks, large request bodies, malformed HTTP requests, and many others. They can also enforce IP address restrictions, including blocking requests from IP addresses known to be used by malicious bots.
+- WAFs can be deployed at the edge (using Front Door or CDN), or regionally on an Application Gateway instance.
