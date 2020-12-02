@@ -1,6 +1,5 @@
-# Concepts
-
-#### [prev](./why.md) | [home](./welcome.md)  | [next](./basics.md)
+,# Concepts
+ or Azure CDN. #### [prev](./why.md) | [home](./welcome.md)  | [next](./basics.md)
 
 Icon | Short Name | Full Name
 --|--|--
@@ -12,6 +11,7 @@ Icon | Short Name | Full Name
 ![nva icon](/svg/azurefirewalls.svg)         | NVA | Network Virtual Appliance
 ![gw icon](/svg/virtualnetworkgateways.svg)  | GW | Gateway
 ![gw icon](/svg/publicipaddresses.svg)       | PIP | Public IP Address
+![waf icon](/png/waf-icon.png) | WAF | Web Application Firewall
 
 ## VNet 
 A logical address space housing virtual subnets. 
@@ -76,3 +76,8 @@ Private Link
 - Associated to Azure services.
 - You are responsible for the hosting the DNS name and correct name resolution.
 
+ ## WAF
+ A Web Application Firewall in a PAAS Firewall which inspects requests on their way to an origin web server, and will block requests before they reach the server.
+- Web application firewall is used in context with an Application Gateway, Azure Front Door or Azure CDN (Preview).
+- WAF provides centralized protection of your web applications against a number of layer 7 attack types. These include SQL injection attacks, cross-site scripting attacks, large request bodies, malformed HTTP requests, and many others. They can also enforce IP address restrictions, including blocking requests from IP addresses known to be used by malicious bots.
+- WAFs can be deployed at the edge (using Front Door or CDN), or regionally on an Application Gateway instance.
