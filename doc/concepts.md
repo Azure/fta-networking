@@ -1,5 +1,6 @@
-,# Concepts
- or Azure CDN. #### [prev](./why.md) | [home](./welcome.md)  | [next](./basics.md)
+# Concepts
+
+#### [prev](./why.md) | [home](./welcome.md)  | [next](./basics.md)
 
 Icon | Short Name | Full Name
 --|--|--
