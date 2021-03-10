@@ -14,7 +14,6 @@ A network security group contains zero, or as many rules as desired, within Azur
 * Destionation 
 * Destionation Port Ranges
 * Protocol
-* Priority
 
 Each Security rule is created as either Inboud or Outbound rule.
 Each NSG also has default security rules which are created automaticly by Azure.
