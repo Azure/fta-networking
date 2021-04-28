@@ -37,6 +37,7 @@ The Azure Architecture center has a a great article comparing the two [here](htt
 * [Peering Types](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-circuit-peerings) - Microsoft and private, do I need 1 or the other or both?
 * [Routing Requirements](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-routing) - Public IP, ASN, etc
 * [High Availabililty](https://docs.microsoft.com/en-us/azure/expressroute/designing-for-high-availability-with-expressroute) - Path redundancy and first mile considerations
+* [Disaster Recovery](https://docs.microsoft.com/en-us/azure/expressroute/designing-for-disaster-recovery-with-expressroute-privatepeering) - Designing for disaster recovery with ExpressRoute
 * [Pricing](https://azure.microsoft.com/en-us/pricing/details/expressroute/) -  For private peering dont forget to take into account circuit, gateway, egress and carrier charges.
 
 ## For more advanced scenarios make sure you are aware of
