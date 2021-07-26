@@ -25,7 +25,7 @@ More information for [Outbound connection (flows)](https://docs.microsoft.com/en
 Azure Bastion (or even via console)
 - RDP and SSH over HTTPS.
 - Secure, simple, effective.
-- (As of 05-Nov-20) [VNet peering and Azure Bastion (Preview)](https://docs.microsoft.com/en-us/azure/bastion/vnet-peering) is available in Preview.
+- [VNet peering and Azure Bastion](https://docs.microsoft.com/en-us/azure/bastion/vnet-peering).
 
 Via an on-premises connection
 - Connecting to the virtual machine's private IP address.
