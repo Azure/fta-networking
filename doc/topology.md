@@ -6,9 +6,11 @@
 
 ![Topology Diagram](/png/topology-210726.png)
 
-A working example for a hub and spoke topology available for you to [try out](/deploy/README.md).
+A working example for a hub and spoke topology available for you to [try out](/deploy/).
 
 ## Address scheme
+
+Use a /16 for each region. 
 
 Location | Type | Name | Address Space
 ---|---|---|---
