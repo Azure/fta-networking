@@ -4,9 +4,9 @@
 
 ## Hub and spoke 
 
-![Topology Diagram](/png/topology-210726.png)
+A working example for a hub and spoke topology is available for you to [try out](/deploy/).
 
-A working example for a hub and spoke topology available for you to [try out](/deploy/).
+![Topology Diagram](/png/topology-210726.png)
 
 ## Address scheme
 
@@ -29,8 +29,8 @@ Secondary Region | vnet | hub      | 10.2.0.0/22
 Secondary Region | vnet | spoke1   | 10.2.4.0/24
 Secondary Region | vnet | spoke2   | 10.2.5.0/24
 Secondary Region | vnet |      ... | ...
-Secondary Region | vnet | spoke255 | 10.2.255.0/24
-Secondary Region | pool | P2S VPN  | 10.1.255.0/24
+Secondary Region | vnet | spokeN   | 10.2.254.0/24
+Secondary Region | pool | P2S VPN  | 10.2.255.0/24
 
 > Secondary region supernet 10.2.0.0/16
 
@@ -58,6 +58,10 @@ VmSubnet2                       | .3.144 | /28 |  16 |  11 | .145, .146, .147 | 
 (spare)                         | .3.192 | /26 |  64 |  59 | .193, .194, .195 | .196 | .254 | .255
 
 > Reserve .255.0/24 for Point to Site VPN.
+
+## Spoke subnets
+
+Spoke vnets are dynamic and map to an application or group of (heavily) related applications. Spoke vnets vary in size but are usually smaller rather than larger and subnets align to the application's requirements.
 
 ## Other topologies
 
