@@ -2,7 +2,7 @@
 
 ## Getting started
 
-This sample uses Bicep to define a modular deployment presented in [topology](../doc/topology.md).
+This sample uses [Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview) to define a modular deployment presented in [topology](../doc/topology.md).
 
 ### Install
 
