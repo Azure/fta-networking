@@ -6,5 +6,5 @@
 
 ![Topology Diagram](/png/topology.png)
 
-A working example for a hub and spoke topology available for you to [deploy](/deploy/README.md).
+A more [detailed](./topology.md) breakdown of the hub and spoke topology is covered after introducing connectivity and routing.
 
