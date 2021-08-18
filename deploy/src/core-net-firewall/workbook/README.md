@@ -8,7 +8,7 @@ flows to determine accuracy of rules.
 
 ## Prerequisites
 
-Follow the pre-requisite guidance in the following article:
+Follow the prerequisite guidance in the following article:
 
 - [Monitor logs using Azure Firewall
   Workbook](https://docs.microsoft.com/en-us/azure/firewall/firewall-workbook)
