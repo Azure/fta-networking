@@ -1,0 +1,833 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "crossComponentResources": [
+          "{Subscriptions}"
+        ],
+        "parameters": [
+          {
+            "id": "a28eb389-bb3f-428c-bdc9-edeffc6a163e",
+            "version": "KqlParameterItem/1.0",
+            "name": "TimeRange",
+            "type": 4,
+            "isRequired": true,
+            "value": {
+              "durationMs": 1209600000
+            },
+            "typeSettings": {
+              "selectableValues": [
+                {
+                  "durationMs": 300000
+                },
+                {
+                  "durationMs": 900000
+                },
+                {
+                  "durationMs": 1800000
+                },
+                {
+                  "durationMs": 3600000
+                },
+                {
+                  "durationMs": 14400000
+                },
+                {
+                  "durationMs": 43200000
+                },
+                {
+                  "durationMs": 86400000
+                },
+                {
+                  "durationMs": 172800000
+                },
+                {
+                  "durationMs": 259200000
+                },
+                {
+                  "durationMs": 604800000
+                },
+                {
+                  "durationMs": 1209600000
+                },
+                {
+                  "durationMs": 2419200000
+                },
+                {
+                  "durationMs": 2592000000
+                },
+                {
+                  "durationMs": 5184000000
+                },
+                {
+                  "durationMs": 7776000000
+                }
+              ],
+              "allowCustom": true
+            },
+            "timeContext": {
+              "durationMs": 86400000
+            }
+          },
+          {
+            "id": "d17cdfe1-5078-41ee-9e26-c3a52fcf156d",
+            "version": "KqlParameterItem/1.0",
+            "name": "Subscriptions",
+            "type": 6,
+            "isRequired": true,
+            "multiSelect": true,
+            "quote": "'",
+            "delimiter": ",",
+            "value": [
+              "value::all"
+            ],
+            "typeSettings": {
+              "additionalResourceOptions": [
+                "value::all"
+              ],
+              "includeAll": true
+            },
+            "timeContext": {
+              "durationMs": 86400000
+            }
+          },
+          {
+            "id": "ca2004a5-5ebc-405d-9d5d-dc9d31dfc0f1",
+            "version": "KqlParameterItem/1.0",
+            "name": "Workspace",
+            "type": 5,
+            "isRequired": true,
+            "multiSelect": true,
+            "quote": "'",
+            "delimiter": ",",
+            "query": "where type =~ 'microsoft.operationalinsights/workspaces'\r\n| summarize by id",
+            "crossComponentResources": [
+              "{Subscriptions}"
+            ],
+            "value": [
+              "value::all"
+            ],
+            "typeSettings": {
+              "additionalResourceOptions": [
+                "value::all"
+              ]
+            },
+            "timeContext": {
+              "durationMs": 86400000
+            },
+            "queryType": 1,
+            "resourceType": "microsoft.resourcegraph/resources"
+          }
+        ],
+        "style": "pills",
+        "queryType": 1,
+        "resourceType": "microsoft.resourcegraph/resources"
+      },
+      "name": "parameters - 0"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "# AzureFirewall Activity in the {TimeRange}\r\nExample based on https://docs.microsoft.com/en-us/azure/firewall/log-analytics-samples"
+      },
+      "name": "text - 3"
+    },
+    {
+      "type": 11,
+      "content": {
+        "version": "LinkItem/1.0",
+        "style": "tabs",
+        "links": [
+          {
+            "cellValue": "SelectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Summary",
+            "subTarget": "Summary",
+            "style": "link"
+          },
+          {
+            "cellValue": "SelectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Threat Intelligence",
+            "subTarget": "ThreatIntelligence",
+            "preText": "Allow",
+            "style": "link"
+          },
+          {
+            "cellValue": "SelectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Network Rules",
+            "subTarget": "NetworkRules",
+            "preText": "Deny",
+            "style": "link"
+          },
+          {
+            "cellValue": "SelectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Application Rules",
+            "subTarget": "ApplicationRules",
+            "style": "link"
+          }
+        ]
+      },
+      "name": "links - 6"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AzureDiagnostics \r\n| where Category == \"AzureFirewallApplicationRule\" or Category == \"AzureFirewallNetworkRule\" or Category == \"AzureFirewallThreatIntelLog\" \r\n| summarize Events = count() by ResourceId, SubscriptionId, TenantId",
+        "size": 4,
+        "title": "Firewalls",
+        "timeContext": {
+          "durationMs": 900000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "exportFieldName": "ResourceId",
+        "exportParameterName": "FirewallResourceId",
+        "exportDefaultValue": "Any",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "filter": true,
+          "sortBy": [
+            {
+              "itemKey": "$gen_link_ResourceId_0",
+              "sortOrder": 1
+            }
+          ]
+        },
+        "sortBy": [
+          {
+            "itemKey": "$gen_link_ResourceId_0",
+            "sortOrder": 1
+          }
+        ],
+        "tileSettings": {
+          "showBorder": false,
+          "titleContent": {
+            "columnMatch": "ResourceId",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "Events",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        }
+      },
+      "name": "Summary-Overview"
+    },
+    {
+      "type": 10,
+      "content": {
+        "chartId": "workbook2bf349f6-a088-46d6-a906-4737bd826fc7",
+        "version": "MetricsItem/2.0",
+        "size": 0,
+        "chartType": 2,
+        "metricScope": 0,
+        "resourceIds": [
+          "{FirewallResourceId}"
+        ],
+        "timeContext": {
+          "durationMs": 0
+        },
+        "timeContextFromParameter": "TimeRange",
+        "resourceType": "microsoft.network/azurefirewalls",
+        "resourceParameter": "FirewallResourceId",
+        "metrics": [
+          {
+            "namespace": "microsoft.network/azurefirewalls",
+            "metric": "microsoft.network/azurefirewalls--FirewallHealth",
+            "aggregation": 4,
+            "splitBy": null
+          }
+        ],
+        "title": "Health Status",
+        "gridSettings": {
+          "rowLimit": 10000
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "Summary"
+      },
+      "name": "Health Status"
+    },
+    {
+      "type": 10,
+      "content": {
+        "chartId": "workbook54b15bd3-dec4-44df-a54a-58790cf1a840",
+        "version": "MetricsItem/2.0",
+        "size": 0,
+        "chartType": 2,
+        "metricScope": 0,
+        "resourceIds": [
+          "{FirewallResourceId}"
+        ],
+        "timeContext": {
+          "durationMs": 0
+        },
+        "timeContextFromParameter": "TimeRange",
+        "resourceType": "microsoft.network/azurefirewalls",
+        "resourceParameter": "FirewallResourceId",
+        "metrics": [
+          {
+            "namespace": "microsoft.network/azurefirewalls",
+            "metric": "microsoft.network/azurefirewalls--DataProcessed",
+            "aggregation": 1,
+            "splitBy": null
+          },
+          {
+            "namespace": "microsoft.network/azurefirewalls",
+            "metric": "microsoft.network/azurefirewalls--SNATPortUtilization",
+            "aggregation": 4
+          },
+          {
+            "namespace": "microsoft.network/azurefirewalls",
+            "metric": "microsoft.network/azurefirewalls--Throughput",
+            "aggregation": 4
+          }
+        ],
+        "title": "Performance",
+        "gridSettings": {
+          "rowLimit": 10000
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "Summary"
+      },
+      "name": "Performance"
+    },
+    {
+      "type": 10,
+      "content": {
+        "chartId": "workbookbf5469d4-4867-4bbd-9cc0-0ed86fb063ca",
+        "version": "MetricsItem/2.0",
+        "size": 0,
+        "chartType": 2,
+        "metricScope": 0,
+        "resourceIds": [
+          "{FirewallResourceId}"
+        ],
+        "timeContext": {
+          "durationMs": 0
+        },
+        "timeContextFromParameter": "TimeRange",
+        "resourceType": "microsoft.network/azurefirewalls",
+        "resourceParameter": "FirewallResourceId",
+        "metrics": [
+          {
+            "namespace": "microsoft.network/azurefirewalls",
+            "metric": "microsoft.network/azurefirewalls--ApplicationRuleHit",
+            "aggregation": 1,
+            "splitBy": null
+          },
+          {
+            "namespace": "microsoft.network/azurefirewalls",
+            "metric": "microsoft.network/azurefirewalls--NetworkRuleHit",
+            "aggregation": 1
+          }
+        ],
+        "title": "Rule Hit Count",
+        "gridSettings": {
+          "rowLimit": 10000
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "Summary"
+      },
+      "name": "Rule Hit Count"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AzureDiagnostics\r\n| where Category == \"AzureFirewallThreatIntelLog\"\r\n| where ResourceId == \"{FirewallResourceId}\" or \"{FirewallResourceId}\" == \"Any\"",
+        "size": 3,
+        "title": "Overview",
+        "timeContext": {
+          "durationMs": 900000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "table"
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "ThreatIntelligence"
+      },
+      "name": "ThreatIntelligence-Activity"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AzureDiagnostics\r\n| where Category == \"AzureFirewallNetworkRule\"\r\n| where ResourceId == \"{FirewallResourceId}\" or \"{FirewallResourceId}\" == \"Any\"\r\n| parse msg_s with Protocol \" request from \" SourceIP \":\" SourcePortInt:int \" to \" TargetIP \":\" TargetPortInt:int *\r\n| parse msg_s with * \". Action: \" Action1a\r\n| parse msg_s with * \" was \" Action1b \" to \" NatDestination\r\n| parse msg_s with Protocol2 \" request from \" SourceIP2 \" to \" TargetIP2 \". Action: \" Action2\r\n| extend\r\nSourcePort = tostring(SourcePortInt),\r\nTargetPort = tostring(TargetPortInt)\r\n| extend \r\n    Action = case(Action1a == \"\", case(Action1b == \"\",Action2,Action1b), Action1a),\r\n    Protocol = case(Protocol == \"\", Protocol2, Protocol),\r\n    SourceIP = case(SourceIP == \"\", SourceIP2, SourceIP),\r\n    TargetIP = case(TargetIP == \"\", TargetIP2, TargetIP),\r\n    //ICMP records don't have port information\r\n    SourcePort = case(SourcePort == \"\", \"N/A\", SourcePort),\r\n    TargetPort = case(TargetPort == \"\", \"N/A\", TargetPort),\r\n    //Regular network rules don't have a DNAT destination\r\n    NatDestination = case(NatDestination == \"\", \"N/A\", NatDestination)\r\n| project TimeGenerated, Action, Protocol, SourceIP, SourcePort, TargetIP, TargetPort, NatDestination, msg_s\r\n| summarize count() by Action",
+        "size": 4,
+        "title": "Action",
+        "timeContext": {
+          "durationMs": 900000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "exportFieldName": "Action",
+        "exportParameterName": "NetRuleAction",
+        "exportDefaultValue": "Any",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "tiles",
+        "tileSettings": {
+          "titleContent": {
+            "columnMatch": "Action",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "count_",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            }
+          },
+          "showBorder": true,
+          "sortCriteriaField": "Action",
+          "sortOrderField": 1
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "NetworkRules"
+      },
+      "name": "NetworkRules-Action"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AzureDiagnostics\r\n| where Category == \"AzureFirewallApplicationRule\"\r\n| where ResourceId == \"{FirewallResourceId}\" or \"{FirewallResourceId}\" == \"Any\"\r\n//using :int makes it easier to pars but later we'll convert to string as we're not interested to do mathematical functions on these fields\r\n//this first parse statement is valid for all entries as they all start with this format\r\n| parse msg_s with Protocol \" request from \" SourceIP \":\" SourcePortInt:int \" \" TempDetails\r\n//case 1: for records that end with: \"was denied. Reason: SNI TLS extension was missing.\"\r\n| parse TempDetails with \"was \" Action1 \". Reason: \" Rule1\r\n//case 2: for records that end with\r\n//\"to ocsp.digicert.com:80. Action: Allow. Rule Collection: RC1. Rule: Rule1\"\r\n//\"to v10.vortex-win.data.microsoft.com:443. Action: Deny. No rule matched. Proceeding with default action\"\r\n| parse TempDetails with \"to \" FQDN \":\" TargetPortInt:int \". Action: \" Action2 \".\" *\r\n//case 2a: for records that end with:\r\n//\"to ocsp.digicert.com:80. Action: Allow. Rule Collection: RC1. Rule: Rule1\"\r\n| parse TempDetails with * \". Rule Collection: \" RuleCollection2a \". Rule:\" Rule2a\r\n//case 2b: for records that end with:\r\n//for records that end with: \"to v10.vortex-win.data.microsoft.com:443. Action: Deny. No rule matched. Proceeding with default action\"\r\n| parse TempDetails with * \"Deny.\" RuleCollection2b \". Proceeding with\" Rule2b\r\n| extend \r\nSourcePort = tostring(SourcePortInt)\r\n|extend\r\nTargetPort = tostring(TargetPortInt)\r\n| extend\r\n//make sure we only have Allowed / Deny in the Action Field\r\nAction1 = case(Action1 == \"Deny\",\"Deny\",\"Unknown Action\")\r\n| extend\r\n    Action = case(Action2 == \"\",Action1,Action2),\r\n    Rule = case(Rule2a == \"\",case(Rule1 == \"\",case(Rule2b == \"\",\"N/A\", Rule2b),Rule1),Rule2a), \r\n    RuleCollection = case(RuleCollection2b == \"\",case(RuleCollection2a == \"\",\"No rule matched\",RuleCollection2a),RuleCollection2b),\r\n    FQDN = case(FQDN == \"\", \"N/A\", FQDN),\r\n    TargetPort = case(TargetPort == \"\", \"N/A\", TargetPort)\r\n| project TimeGenerated, msg_s, Protocol, SourceIP, SourcePort, FQDN, TargetPort, Action ,RuleCollection, Rule\r\n| summarize count() by Action",
+        "size": 4,
+        "title": "Action",
+        "timeContext": {
+          "durationMs": 900000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "exportFieldName": "Action",
+        "exportParameterName": "AppRuleAction",
+        "exportDefaultValue": "Any",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "tiles",
+        "tileSettings": {
+          "titleContent": {
+            "columnMatch": "Action",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "count_",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            }
+          },
+          "showBorder": true,
+          "sortCriteriaField": "Action",
+          "sortOrderField": 1
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "ApplicationRules"
+      },
+      "name": "ApplicationRules-Action"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AzureDiagnostics\r\n| where Category == \"AzureFirewallNetworkRule\"\r\n| where ResourceId == \"{FirewallResourceId}\" or \"{FirewallResourceId}\" == \"Any\"\r\n| parse msg_s with Protocol \" request from \" SourceIP \":\" SourcePortInt:int \" to \" TargetIP \":\" TargetPortInt:int *\r\n| parse msg_s with * \". Action: \" Action1a\r\n| parse msg_s with * \" was \" Action1b \" to \" NatDestination\r\n| parse msg_s with Protocol2 \" request from \" SourceIP2 \" to \" TargetIP2 \". Action: \" Action2\r\n| extend\r\nSourcePort = tostring(SourcePortInt),\r\nTargetPort = tostring(TargetPortInt)\r\n| extend \r\n    Action = case(Action1a == \"\", case(Action1b == \"\",Action2,Action1b), Action1a),\r\n    Protocol = case(Protocol == \"\", Protocol2, Protocol),\r\n    SourceIP = case(SourceIP == \"\", SourceIP2, SourceIP),\r\n    TargetIP = case(TargetIP == \"\", TargetIP2, TargetIP),\r\n    //ICMP records don't have port information\r\n    SourcePort = case(SourcePort == \"\", \"N/A\", SourcePort),\r\n    TargetPort = case(TargetPort == \"\", \"N/A\", TargetPort),\r\n    //Regular network rules don't have a DNAT destination\r\n    NatDestination = case(NatDestination == \"\", \"N/A\", NatDestination)\r\n| project TimeGenerated, Action, Protocol, SourceIP, SourcePort, TargetIP, TargetPort, NatDestination, msg_s\r\n| where Action == \"{NetRuleAction}\" or \"{NetRuleAction}\" == \"Any\"\r\n| summarize count() by Protocol",
+        "size": 4,
+        "title": "Protocol",
+        "timeContext": {
+          "durationMs": 900000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "exportFieldName": "Protocol",
+        "exportParameterName": "NetRuleProtocol",
+        "exportDefaultValue": "Any",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "tiles",
+        "tileSettings": {
+          "titleContent": {
+            "columnMatch": "Protocol",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "count_",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          },
+          "showBorder": true
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "NetworkRules"
+      },
+      "name": "NetworkRules-Protocol"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AzureDiagnostics\r\n| where Category == \"AzureFirewallApplicationRule\"\r\n| where ResourceId == \"{FirewallResourceId}\" or \"{FirewallResourceId}\" == \"Any\"\r\n//using :int makes it easier to pars but later we'll convert to string as we're not interested to do mathematical functions on these fields\r\n//this first parse statement is valid for all entries as they all start with this format\r\n| parse msg_s with Protocol \" request from \" SourceIP \":\" SourcePortInt:int \" \" TempDetails\r\n//case 1: for records that end with: \"was denied. Reason: SNI TLS extension was missing.\"\r\n| parse TempDetails with \"was \" Action1 \". Reason: \" Rule1\r\n//case 2: for records that end with\r\n//\"to ocsp.digicert.com:80. Action: Allow. Rule Collection: RC1. Rule: Rule1\"\r\n//\"to v10.vortex-win.data.microsoft.com:443. Action: Deny. No rule matched. Proceeding with default action\"\r\n| parse TempDetails with \"to \" FQDN \":\" TargetPortInt:int \". Action: \" Action2 \".\" *\r\n//case 2a: for records that end with:\r\n//\"to ocsp.digicert.com:80. Action: Allow. Rule Collection: RC1. Rule: Rule1\"\r\n| parse TempDetails with * \". Rule Collection: \" RuleCollection2a \". Rule:\" Rule2a\r\n//case 2b: for records that end with:\r\n//for records that end with: \"to v10.vortex-win.data.microsoft.com:443. Action: Deny. No rule matched. Proceeding with default action\"\r\n| parse TempDetails with * \"Deny.\" RuleCollection2b \". Proceeding with\" Rule2b\r\n| extend \r\nSourcePort = tostring(SourcePortInt)\r\n|extend\r\nTargetPort = tostring(TargetPortInt)\r\n| extend\r\n//make sure we only have Allowed / Deny in the Action Field\r\nAction1 = case(Action1 == \"Deny\",\"Deny\",\"Unknown Action\")\r\n| extend\r\n    Action = case(Action2 == \"\",Action1,Action2),\r\n    Rule = case(Rule2a == \"\",case(Rule1 == \"\",case(Rule2b == \"\",\"N/A\", Rule2b),Rule1),Rule2a), \r\n    RuleCollection = case(RuleCollection2b == \"\",case(RuleCollection2a == \"\",\"No rule matched\",RuleCollection2a),RuleCollection2b),\r\n    FQDN = case(FQDN == \"\", \"N/A\", FQDN),\r\n    TargetPort = case(TargetPort == \"\", \"N/A\", TargetPort)\r\n| project TimeGenerated, msg_s, Protocol, SourceIP, SourcePort, FQDN, TargetPort, Action, RuleCollection, Rule\r\n| where Action == \"{AppRuleAction}\" or \"{AppRuleAction}\" == \"Any\"\r\n| summarize count() by Protocol",
+        "size": 4,
+        "title": "Protocol",
+        "timeContext": {
+          "durationMs": 900000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "exportFieldName": "Protocol",
+        "exportParameterName": "AppRuleProtocol",
+        "exportDefaultValue": "Any",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "tiles",
+        "tileSettings": {
+          "titleContent": {
+            "columnMatch": "Protocol",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "count_",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          },
+          "showBorder": true,
+          "sortCriteriaField": "count_",
+          "sortOrderField": 2
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "ApplicationRules"
+      },
+      "name": "ApplicationRules-Protocol"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AzureDiagnostics\r\n| where Category == \"AzureFirewallNetworkRule\"\r\n| where ResourceId == \"{FirewallResourceId}\" or \"{FirewallResourceId}\" == \"Any\"\r\n| parse msg_s with Protocol \" request from \" SourceIP \":\" SourcePortInt:int \" to \" TargetIP \":\" TargetPortInt:int *\r\n| parse msg_s with * \". Action: \" Action1a\r\n| parse msg_s with * \" was \" Action1b \" to \" NatDestination\r\n| parse msg_s with Protocol2 \" request from \" SourceIP2 \" to \" TargetIP2 \". Action: \" Action2\r\n| extend\r\nSourcePort = tostring(SourcePortInt),\r\nTargetPort = tostring(TargetPortInt)\r\n| extend \r\n    Action = case(Action1a == \"\", case(Action1b == \"\",Action2,Action1b), Action1a),\r\n    Protocol = case(Protocol == \"\", Protocol2, Protocol),\r\n    SourceIP = case(SourceIP == \"\", SourceIP2, SourceIP),\r\n    TargetIP = case(TargetIP == \"\", TargetIP2, TargetIP),\r\n    //ICMP records don't have port information\r\n    SourcePort = case(SourcePort == \"\", \"N/A\", SourcePort),\r\n    TargetPort = case(TargetPort == \"\", \"N/A\", TargetPort),\r\n    //Regular network rules don't have a DNAT destination\r\n    NatDestination = case(NatDestination == \"\", \"N/A\", NatDestination)\r\n| project TimeGenerated, Action, Protocol, SourceIP, SourcePort, TargetIP, TargetPort, NatDestination, msg_s\r\n| where Action == \"{NetRuleAction}\" or \"{NetRuleAction}\" == \"Any\"\r\n| where Protocol == \"{NetRuleProtocol}\" or \"{NetRuleProtocol}\" == \"Any\"\r\n| summarize Packets = count() by SourceIP, TargetIP\r\n| sort by Packets desc",
+        "size": 1,
+        "title": "Conversations",
+        "timeContext": {
+          "durationMs": 900000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "exportedParameters": [
+          {
+            "fieldName": "SourceIP",
+            "parameterName": "NetRuleSourceIP",
+            "parameterType": 1,
+            "defaultValue": "Any"
+          },
+          {
+            "fieldName": "TargetIP",
+            "parameterName": "NetRuleTargetIP",
+            "parameterType": 1,
+            "defaultValue": "Any"
+          }
+        ],
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "filter": true
+        },
+        "graphSettings": {
+          "type": 0,
+          "topContent": {
+            "columnMatch": "SourceIP",
+            "formatter": 1
+          },
+          "centerContent": {
+            "columnMatch": "Packets",
+            "formatter": 1,
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "style": "decimal",
+                "maximumFractionDigits": 2,
+                "maximumSignificantDigits": 3
+              }
+            }
+          },
+          "bottomContent": {
+            "columnMatch": "TargetIP"
+          },
+          "nodeIdField": "Packets",
+          "sourceIdField": "SourceIP",
+          "targetIdField": "TargetIP",
+          "edgeSize": "Packets",
+          "edgeLabel": "SourcePort",
+          "nodeSize": null,
+          "staticNodeSize": 100,
+          "colorSettings": {
+            "nodeColorField": "SourcePort",
+            "type": 1,
+            "colorPalette": "default"
+          },
+          "groupByField": "SourceIP",
+          "hivesMargin": 5
+        },
+        "chartSettings": {
+          "xAxis": "SourceIP",
+          "yAxis": [
+            "Packets"
+          ],
+          "group": "SourcePort",
+          "createOtherGroup": null,
+          "ySettings": {
+            "numberFormatSettings": {
+              "unit": 17,
+              "options": {
+                "style": "decimal",
+                "useGrouping": false
+              }
+            }
+          }
+        },
+        "mapSettings": {
+          "locInfo": "LatLong",
+          "sizeSettings": "Packets",
+          "sizeAggregation": "Sum",
+          "legendMetric": "Packets",
+          "legendAggregation": "Sum",
+          "itemColorSettings": {
+            "type": "heatmap",
+            "colorAggregation": "Sum",
+            "nodeColorField": "Packets",
+            "heatmapPalette": "greenRed"
+          }
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "NetworkRules"
+      },
+      "name": "NetworkRules-Conversations"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AzureDiagnostics\r\n| where Category == \"AzureFirewallApplicationRule\"\r\n| where ResourceId == \"{FirewallResourceId}\" or \"{FirewallResourceId}\" == \"Any\"\r\n//using :int makes it easier to pars but later we'll convert to string as we're not interested to do mathematical functions on these fields\r\n//this first parse statement is valid for all entries as they all start with this format\r\n| parse msg_s with Protocol \" request from \" SourceIP \":\" SourcePortInt:int \" \" TempDetails\r\n//case 1: for records that end with: \"was denied. Reason: SNI TLS extension was missing.\"\r\n| parse TempDetails with \"was \" Action1 \". Reason: \" Rule1\r\n//case 2: for records that end with\r\n//\"to ocsp.digicert.com:80. Action: Allow. Rule Collection: RC1. Rule: Rule1\"\r\n//\"to v10.vortex-win.data.microsoft.com:443. Action: Deny. No rule matched. Proceeding with default action\"\r\n| parse TempDetails with \"to \" FQDN \":\" TargetPortInt:int \". Action: \" Action2 \".\" *\r\n//case 2a: for records that end with:\r\n//\"to ocsp.digicert.com:80. Action: Allow. Rule Collection: RC1. Rule: Rule1\"\r\n| parse TempDetails with * \". Rule Collection: \" RuleCollection2a \". Rule:\" Rule2a\r\n//case 2b: for records that end with:\r\n//for records that end with: \"to v10.vortex-win.data.microsoft.com:443. Action: Deny. No rule matched. Proceeding with default action\"\r\n| parse TempDetails with * \"Deny.\" RuleCollection2b \". Proceeding with\" Rule2b\r\n| extend \r\nSourcePort = tostring(SourcePortInt)\r\n|extend\r\nTargetPort = tostring(TargetPortInt)\r\n| extend\r\n//make sure we only have Allowed / Deny in the Action Field\r\nAction1 = case(Action1 == \"Deny\",\"Deny\",\"Unknown Action\")\r\n| extend\r\n    Action = case(Action2 == \"\",Action1,Action2),\r\n    Rule = case(Rule2a == \"\",case(Rule1 == \"\",case(Rule2b == \"\",\"N/A\", Rule2b),Rule1),Rule2a), \r\n    RuleCollection = case(RuleCollection2b == \"\",case(RuleCollection2a == \"\",\"No rule matched\",RuleCollection2a),RuleCollection2b),\r\n    TargetFQDN = case(FQDN == \"\", \"N/A\", FQDN),\r\n    TargetPort = case(TargetPort == \"\", \"N/A\", TargetPort)\r\n| project TimeGenerated, msg_s, Protocol, SourceIP, SourcePort, TargetFQDN, TargetPort, Action ,RuleCollection, Rule\r\n| where Action == \"{AppRuleAction}\" or \"{AppRuleAction}\" == \"Any\"\r\n| where Protocol == \"{AppRuleProtocol}\" or \"{AppRuleProtocol}\" == \"Any\"\r\n| summarize Packets = count() by SourceIP, TargetFQDN\r\n| sort by Packets desc\r\n",
+        "size": 1,
+        "title": "Conversations",
+        "timeContext": {
+          "durationMs": 900000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "exportedParameters": [
+          {
+            "fieldName": "SourceIP",
+            "parameterName": "AppRuleSourceIP",
+            "parameterType": 1,
+            "defaultValue": "Any"
+          },
+          {
+            "fieldName": "TargetFQDN",
+            "parameterName": "AppRuleTargetFQDN",
+            "parameterType": 1,
+            "defaultValue": "Any"
+          }
+        ],
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "filter": true
+        },
+        "tileSettings": {
+          "showBorder": false,
+          "titleContent": {
+            "columnMatch": "Rule",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "count_",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        },
+        "graphSettings": {
+          "type": 0,
+          "topContent": {
+            "columnMatch": "Rule",
+            "formatter": 1
+          },
+          "centerContent": {
+            "columnMatch": "count_",
+            "formatter": 1,
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "ApplicationRules"
+      },
+      "name": "ApplicationRules-Conversations"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AzureDiagnostics\r\n| where Category == \"AzureFirewallNetworkRule\"\r\n| where ResourceId == \"{FirewallResourceId}\" or \"{FirewallResourceId}\" == \"Any\"\r\n| parse msg_s with Protocol \" request from \" SourceIP \":\" SourcePortInt:int \" to \" TargetIP \":\" TargetPortInt:int *\r\n| parse msg_s with * \". Action: \" Action1a\r\n| parse msg_s with * \" was \" Action1b \" to \" NatDestination\r\n| parse msg_s with Protocol2 \" request from \" SourceIP2 \" to \" TargetIP2 \". Action: \" Action2\r\n| extend\r\nSourcePort = tostring(SourcePortInt),\r\nTargetPort = tostring(TargetPortInt)\r\n| extend \r\n    Action = case(Action1a == \"\", case(Action1b == \"\",Action2,Action1b), Action1a),\r\n    Protocol = case(Protocol == \"\", Protocol2, Protocol),\r\n    SourceIP = case(SourceIP == \"\", SourceIP2, SourceIP),\r\n    TargetIP = case(TargetIP == \"\", TargetIP2, TargetIP),\r\n    //ICMP records don't have port information\r\n    SourcePort = case(SourcePort == \"\", \"N/A\", SourcePort),\r\n    TargetPort = case(TargetPort == \"\", \"N/A\", TargetPort),\r\n    //Regular network rules don't have a DNAT destination\r\n    NatDestination = case(NatDestination == \"\", \"N/A\", NatDestination)\r\n| project TimeGenerated, Action, Protocol, SourceIP, SourcePort, TargetIP, TargetPort, NatDestination, msg_s\r\n| where Action == \"{NetRuleAction}\" or \"{NetRuleAction}\" == \"Any\"\r\n| where Protocol == \"{NetRuleProtocol}\" or \"{NetRuleProtocol}\" == \"Any\"\r\n| where SourceIP == \"{NetRuleSourceIP}\" or \"{NetRuleSourceIP}\" == \"Any\"\r\n| where TargetIP == \"{NetRuleTargetIP}\" or \"{NetRuleTargetIP}\" == \"Any\"\r\n| sort by TimeGenerated",
+        "size": 3,
+        "title": "Packets",
+        "timeContext": {
+          "durationMs": 900000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "showExportToExcel": true,
+        "exportToExcelOptions": "all",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "gridSettings": {
+          "rowLimit": 50,
+          "filter": true
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "NetworkRules"
+      },
+      "name": "NetworkRules-Packets"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AzureDiagnostics\r\n| where Category == \"AzureFirewallApplicationRule\"\r\n| where ResourceId == \"{FirewallResourceId}\" or \"{FirewallResourceId}\" == \"Any\"\r\n| parse msg_s with Protocol \" request from \" SourceIP \":\" SourcePortInt:int \" \" TempDetails\r\n| parse TempDetails with \"was \" Action1 \". Reason: \" Rule1\r\n| parse TempDetails with \"to \" FQDN \":\" TargetPortInt:int \". Action: \" Action2 \".\" *\r\n| parse TempDetails with * \". Rule Collection: \" RuleCollection2a \". Rule:\" Rule2a\r\n| parse TempDetails with * \"Deny.\" RuleCollection2b \". Proceeding with\" Rule2b\r\n| extend \r\nSourcePort = tostring(SourcePortInt)\r\n|extend\r\nTargetPort = tostring(TargetPortInt)\r\n| extend\r\nAction1 = case(Action1 == \"Deny\",\"Deny\",\"Unknown Action\")\r\n| extend\r\n    Action = case(Action2 == \"\",Action1,Action2),\r\n    Rule = case(Rule2a == \"\",case(Rule1 == \"\",case(Rule2b == \"\",\"N/A\", Rule2b),Rule1),Rule2a), \r\n    RuleCollection = case(RuleCollection2b == \"\",case(RuleCollection2a == \"\",\"No rule matched\",RuleCollection2a),RuleCollection2b),\r\n    TargetFQDN = case(FQDN == \"\", \"N/A\", FQDN),\r\n    TargetPort = case(TargetPort == \"\", \"N/A\", TargetPort)\r\n| project TimeGenerated, Action, Protocol, SourceIP, SourcePort, TargetFQDN, TargetPort, RuleCollection, Rule, msg_s\r\n| where Action == \"{AppRuleAction}\" or \"{AppRuleAction}\" == \"Any\"\r\n| where Protocol == \"{AppRuleProtocol}\" or \"{AppRuleProtocol}\" == \"Any\"\r\n| where SourceIP == \"{AppRuleSourceIP}\" or \"{AppRuleSourceIP}\" == \"Any\"\r\n| where TargetFQDN == \"{AppRuleTargetFQDN}\" or \"{AppRuleTargetFQDN}\" == \"Any\"\r\n| sort by TimeGenerated\r\n",
+        "size": 3,
+        "title": "Packets",
+        "timeContext": {
+          "durationMs": 900000
+        },
+        "timeContextFromParameter": "TimeRange",
+        "showExportToExcel": true,
+        "exportToExcelOptions": "all",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "rowLimit": 50,
+          "filter": true
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "ApplicationRules"
+      },
+      "name": "ApplicationRules-Packets"
+    }
+  ],
+  "fallbackResourceIds": [
+    "azure monitor"
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}
