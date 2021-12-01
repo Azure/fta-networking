@@ -4,6 +4,8 @@
 
 This sample uses [Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview) to deploy a specific Virtual WAN topology.
 
+![topology](png/topology.png)
+
 ### Install
 
 1. Install the Azure CLI by following the [docs](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) article.
