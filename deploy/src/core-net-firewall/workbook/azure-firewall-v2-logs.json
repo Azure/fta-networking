@@ -1,0 +1,789 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "crossComponentResources": [
+          "{Subscriptions}"
+        ],
+        "parameters": [
+          {
+            "id": "a28eb389-bb3f-428c-bdc9-edeffc6a163e",
+            "version": "KqlParameterItem/1.0",
+            "name": "TimeRange",
+            "type": 4,
+            "isRequired": true,
+            "value": {
+              "durationMs": 86400000
+            },
+            "typeSettings": {
+              "selectableValues": [
+                {
+                  "durationMs": 300000
+                },
+                {
+                  "durationMs": 900000
+                },
+                {
+                  "durationMs": 1800000
+                },
+                {
+                  "durationMs": 3600000
+                },
+                {
+                  "durationMs": 14400000
+                },
+                {
+                  "durationMs": 43200000
+                },
+                {
+                  "durationMs": 86400000
+                },
+                {
+                  "durationMs": 172800000
+                },
+                {
+                  "durationMs": 259200000
+                },
+                {
+                  "durationMs": 604800000
+                },
+                {
+                  "durationMs": 1209600000
+                },
+                {
+                  "durationMs": 2419200000
+                },
+                {
+                  "durationMs": 2592000000
+                },
+                {
+                  "durationMs": 5184000000
+                },
+                {
+                  "durationMs": 7776000000
+                }
+              ],
+              "allowCustom": true
+            },
+            "timeContext": {
+              "durationMs": 86400000
+            }
+          },
+          {
+            "id": "d17cdfe1-5078-41ee-9e26-c3a52fcf156d",
+            "version": "KqlParameterItem/1.0",
+            "name": "Subscriptions",
+            "type": 6,
+            "isRequired": true,
+            "multiSelect": true,
+            "quote": "'",
+            "delimiter": ",",
+            "value": [
+              "value::all"
+            ],
+            "typeSettings": {
+              "additionalResourceOptions": [
+                "value::all"
+              ],
+              "includeAll": true
+            },
+            "timeContext": {
+              "durationMs": 86400000
+            }
+          },
+          {
+            "id": "ca2004a5-5ebc-405d-9d5d-dc9d31dfc0f1",
+            "version": "KqlParameterItem/1.0",
+            "name": "Workspace",
+            "type": 5,
+            "isRequired": true,
+            "multiSelect": true,
+            "quote": "'",
+            "delimiter": ",",
+            "query": "where type =~ 'microsoft.operationalinsights/workspaces'\r\n| summarize by id",
+            "crossComponentResources": [
+              "{Subscriptions}"
+            ],
+            "value": [
+              "value::all"
+            ],
+            "typeSettings": {
+              "additionalResourceOptions": [
+                "value::all"
+              ]
+            },
+            "timeContext": {
+              "durationMs": 86400000
+            },
+            "queryType": 1,
+            "resourceType": "microsoft.resourcegraph/resources"
+          }
+        ],
+        "style": "pills",
+        "queryType": 1,
+        "resourceType": "microsoft.resourcegraph/resources"
+      },
+      "name": "parameters - 0"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "# AzureFirewall Activity in the {TimeRange}\r\nExample based on https://docs.microsoft.com/en-us/azure/firewall/log-analytics-samples"
+      },
+      "name": "text - 3"
+    },
+    {
+      "type": 11,
+      "content": {
+        "version": "LinkItem/1.0",
+        "style": "tabs",
+        "links": [
+          {
+            "id": "5dafa9ff-9733-417b-a656-403539e910cb",
+            "cellValue": "SelectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Network Rules",
+            "subTarget": "AZFWNetworkRule",
+            "preText": "Deny",
+            "style": "link"
+          },
+          {
+            "id": "40983c10-a808-4e8d-a18d-a3a70f4e1ecc",
+            "cellValue": "SelectedTab",
+            "linkTarget": "parameter",
+            "linkLabel": "Application Rules",
+            "subTarget": "AZFWApplicationRule",
+            "style": "link"
+          }
+        ]
+      },
+      "name": "links - 6"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "{SelectedTab}\r\n| summarize Events = count() by _ResourceId",
+        "size": 4,
+        "title": "Firewall ({SelectedTab})",
+        "timeContextFromParameter": "TimeRange",
+        "exportFieldName": "_ResourceId",
+        "exportParameterName": "Firewall",
+        "exportDefaultValue": "Any",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "formatters": [
+            {
+              "columnMatch": "_ResourceId",
+              "formatter": 13,
+              "formatOptions": {
+                "linkTarget": null,
+                "showIcon": true
+              }
+            }
+          ],
+          "labelSettings": [
+            {
+              "columnId": "_ResourceId",
+              "label": "Firewall"
+            },
+            {
+              "columnId": "Events",
+              "label": "Packets"
+            }
+          ]
+        },
+        "sortBy": [],
+        "tileSettings": {
+          "showBorder": false,
+          "titleContent": {
+            "columnMatch": "ResourceId",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "Events",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        },
+        "graphSettings": {
+          "type": 0,
+          "topContent": {
+            "columnMatch": "_ResourceId",
+            "formatter": 1
+          },
+          "centerContent": {
+            "columnMatch": "Events",
+            "formatter": 1,
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        }
+      },
+      "name": "Firewall"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "{SelectedTab}\r\n| where _ResourceId == \"{Firewall}\" or \"{Firewall}\" == \"Any\"\r\n| summarize count() by Action",
+        "size": 4,
+        "title": "Action ({SelectedTab})",
+        "timeContextFromParameter": "TimeRange",
+        "exportFieldName": "Action",
+        "exportParameterName": "Action",
+        "exportDefaultValue": "Any",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "labelSettings": [
+            {
+              "columnId": "count_",
+              "label": "Packets"
+            }
+          ]
+        },
+        "tileSettings": {
+          "titleContent": {
+            "columnMatch": "Action",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "count_",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            }
+          },
+          "showBorder": true,
+          "sortCriteriaField": "Action",
+          "sortOrderField": 1,
+          "size": "auto"
+        }
+      },
+      "name": "Action"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "{SelectedTab}\r\n| where _ResourceId == \"{Firewall}\" or \"{Firewall}\" == \"Any\"\r\n| where Action == \"{Action}\" or \"{Action}\" == \"Any\"\r\n| summarize count() by Protocol",
+        "size": 4,
+        "title": "Protocol ({SelectedTab})",
+        "timeContextFromParameter": "TimeRange",
+        "exportFieldName": "Protocol",
+        "exportParameterName": "Protocol",
+        "exportDefaultValue": "Any",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "labelSettings": [
+            {
+              "columnId": "count_",
+              "label": "Packets"
+            }
+          ]
+        },
+        "tileSettings": {
+          "titleContent": {
+            "columnMatch": "Protocol",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "count_",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          },
+          "showBorder": true,
+          "size": "auto"
+        },
+        "graphSettings": {
+          "type": 0,
+          "topContent": {
+            "columnMatch": "Protocol",
+            "formatter": 1
+          },
+          "centerContent": {
+            "columnMatch": "count_",
+            "formatter": 1,
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        }
+      },
+      "name": "Protocol"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "{SelectedTab}\r\n| where _ResourceId == \"{Firewall}\" or \"{Firewall}\" == \"Any\"\r\n| where Action == \"{Action}\" or \"{Action}\" == \"Any\"\r\n| summarize count() by DestinationPort",
+        "size": 4,
+        "title": "Port ({SelectedTab})",
+        "timeContextFromParameter": "TimeRange",
+        "exportFieldName": "DestinationPort",
+        "exportParameterName": "Port",
+        "exportDefaultValue": "Any",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "table",
+        "gridSettings": {
+          "sortBy": [
+            {
+              "itemKey": "count_",
+              "sortOrder": 2
+            }
+          ],
+          "labelSettings": [
+            {
+              "columnId": "DestinationPort",
+              "label": "Port"
+            },
+            {
+              "columnId": "count_",
+              "label": "Packets"
+            }
+          ]
+        },
+        "sortBy": [
+          {
+            "itemKey": "count_",
+            "sortOrder": 2
+          }
+        ],
+        "tileSettings": {
+          "titleContent": {
+            "columnMatch": "Protocol",
+            "formatter": 1
+          },
+          "leftContent": {
+            "columnMatch": "count_",
+            "formatter": 12,
+            "formatOptions": {
+              "palette": "auto"
+            },
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          },
+          "showBorder": true,
+          "size": "auto"
+        },
+        "graphSettings": {
+          "type": 0,
+          "topContent": {
+            "columnMatch": "Protocol",
+            "formatter": 1
+          },
+          "centerContent": {
+            "columnMatch": "count_",
+            "formatter": 1,
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "maximumSignificantDigits": 3,
+                "maximumFractionDigits": 2
+              }
+            }
+          }
+        }
+      },
+      "name": "Port"
+    },
+    {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "parameters": [
+          {
+            "id": "dd840eee-cc54-4db5-aeeb-bdb5215b3135",
+            "version": "KqlParameterItem/1.0",
+            "name": "SourceIp",
+            "type": 1,
+            "timeContext": {
+              "durationMs": 86400000
+            },
+            "value": ""
+          },
+          {
+            "id": "0e5742c3-dc5d-464b-8014-062544f08a10",
+            "version": "KqlParameterItem/1.0",
+            "name": "DestinationIp",
+            "type": 1,
+            "timeContext": {
+              "durationMs": 86400000
+            },
+            "value": ""
+          },
+          {
+            "id": "697e6257-fe6a-4c53-a16a-ae83ce69154f",
+            "version": "KqlParameterItem/1.0",
+            "name": "Fqdn",
+            "type": 1,
+            "timeContext": {
+              "durationMs": 86400000
+            },
+            "value": "oms."
+          },
+          {
+            "id": "75c6361c-ddac-4e9c-8d10-46103be9ed2d",
+            "version": "KqlParameterItem/1.0",
+            "name": "DestinationPort",
+            "label": "Port",
+            "type": 1,
+            "value": ""
+          }
+        ],
+        "style": "above",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces"
+      },
+      "name": "parameters - 10"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWNetworkRule\r\n| where _ResourceId == \"{Firewall}\" or \"{Firewall}\" == \"Any\"\r\n| where Action == \"{Action}\" or \"{Action}\" == \"Any\"\r\n| where Protocol == \"{Protocol}\" or \"{Protocol}\" == \"Any\"\r\n| where DestinationPort == \"{Port}\" or \"{Port}\" == \"Any\"\r\n| where SourceIp == \"{SourceIp}\" or \"{SourceIp}\" == \"\"\r\n| where DestinationIp == \"{DestinationIp}\" or \"{DestinationIp}\" == \"\"\r\n| where DestinationPort == \"{DestinationPort}\" or \"{DestinationPort}\" == \"\"\r\n| summarize Packets = count() by SourceIp, DestinationIp\r\n| sort by Packets desc",
+        "size": 1,
+        "showAnalytics": true,
+        "title": "Summary (AZFWNetworkRule)",
+        "timeContextFromParameter": "TimeRange",
+        "showRefreshButton": true,
+        "exportedParameters": [
+          {
+            "fieldName": "SourceIp",
+            "parameterName": "NetRuleSourceIp",
+            "parameterType": 1,
+            "defaultValue": "Any"
+          },
+          {
+            "fieldName": "DestinationIp",
+            "parameterName": "NetRuleDestinationIp",
+            "parameterType": 1,
+            "defaultValue": "Any"
+          }
+        ],
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "table",
+        "showExpandCollapseGrid": true,
+        "gridSettings": {
+          "rowLimit": 5
+        },
+        "graphSettings": {
+          "type": 0,
+          "topContent": {
+            "columnMatch": "SourceIP",
+            "formatter": 1
+          },
+          "centerContent": {
+            "columnMatch": "Packets",
+            "formatter": 1,
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "style": "decimal",
+                "maximumFractionDigits": 2,
+                "maximumSignificantDigits": 3
+              }
+            }
+          },
+          "bottomContent": {
+            "columnMatch": "TargetIP"
+          },
+          "nodeIdField": "Packets",
+          "sourceIdField": "SourceIP",
+          "targetIdField": "TargetIP",
+          "edgeSize": "Packets",
+          "edgeLabel": "SourcePort",
+          "nodeSize": null,
+          "staticNodeSize": 100,
+          "colorSettings": {
+            "nodeColorField": "SourcePort",
+            "type": 1,
+            "colorPalette": "default"
+          },
+          "groupByField": "SourceIP",
+          "hivesMargin": 5
+        },
+        "chartSettings": {
+          "xAxis": "SourceIP",
+          "yAxis": [
+            "Packets"
+          ],
+          "group": "SourcePort",
+          "createOtherGroup": null,
+          "ySettings": {
+            "numberFormatSettings": {
+              "unit": 17,
+              "options": {
+                "style": "decimal",
+                "useGrouping": false
+              }
+            }
+          }
+        },
+        "mapSettings": {
+          "locInfo": "LatLong",
+          "sizeSettings": "Packets",
+          "sizeAggregation": "Sum",
+          "legendMetric": "Packets",
+          "legendAggregation": "Sum",
+          "itemColorSettings": {
+            "type": "heatmap",
+            "colorAggregation": "Sum",
+            "nodeColorField": "Packets",
+            "heatmapPalette": "greenRed"
+          }
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "AZFWNetworkRule"
+      },
+      "showPin": true,
+      "name": "AZFWNetworkRule-Summary"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWApplicationRule\r\n| where _ResourceId == \"{Firewall}\" or \"{Firewall}\" == \"Any\"\r\n| where Action == \"{Action}\" or \"{Action}\" == \"Any\"\r\n| where Protocol == \"{Protocol}\" or \"{Protocol}\" == \"Any\"\r\n| where DestinationPort == \"{Port}\" or \"{Port}\" == \"Any\"\r\n| where SourceIp == \"{SourceIp}\" or \"{SourceIp}\" == \"\"\r\n| where Fqdn contains \"{Fqdn}\" or \"{Fqdn}\" == \"\"\r\n| where DestinationPort == \"{DestinationPort}\" or \"{DestinationPort}\" == \"\"\r\n| summarize Packets = count() by SourceIp, Fqdn\r\n| sort by Packets desc",
+        "size": 1,
+        "showAnalytics": true,
+        "title": "Summary (AZFWApplicationRule)",
+        "timeContextFromParameter": "TimeRange",
+        "showRefreshButton": true,
+        "exportedParameters": [
+          {
+            "fieldName": "SourceIp",
+            "parameterName": "AppRuleSourceIp",
+            "parameterType": 1,
+            "defaultValue": "Any"
+          },
+          {
+            "fieldName": "Fqdn",
+            "parameterName": "AppRuleFqdn",
+            "parameterType": 1,
+            "defaultValue": "Any"
+          }
+        ],
+        "showExportToExcel": true,
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "visualization": "table",
+        "showExpandCollapseGrid": true,
+        "gridSettings": {
+          "rowLimit": 5
+        },
+        "graphSettings": {
+          "type": 0,
+          "topContent": {
+            "columnMatch": "SourceIP",
+            "formatter": 1
+          },
+          "centerContent": {
+            "columnMatch": "Packets",
+            "formatter": 1,
+            "numberFormat": {
+              "unit": 17,
+              "options": {
+                "style": "decimal",
+                "maximumFractionDigits": 2,
+                "maximumSignificantDigits": 3
+              }
+            }
+          },
+          "bottomContent": {
+            "columnMatch": "TargetIP"
+          },
+          "nodeIdField": "Packets",
+          "sourceIdField": "SourceIP",
+          "targetIdField": "TargetIP",
+          "edgeSize": "Packets",
+          "edgeLabel": "SourcePort",
+          "nodeSize": null,
+          "staticNodeSize": 100,
+          "colorSettings": {
+            "nodeColorField": "SourcePort",
+            "type": 1,
+            "colorPalette": "default"
+          },
+          "groupByField": "SourceIP",
+          "hivesMargin": 5
+        },
+        "chartSettings": {
+          "xAxis": "SourceIP",
+          "yAxis": [
+            "Packets"
+          ],
+          "group": "SourcePort",
+          "createOtherGroup": null,
+          "ySettings": {
+            "numberFormatSettings": {
+              "unit": 17,
+              "options": {
+                "style": "decimal",
+                "useGrouping": false
+              }
+            }
+          }
+        },
+        "mapSettings": {
+          "locInfo": "LatLong",
+          "sizeSettings": "Packets",
+          "sizeAggregation": "Sum",
+          "legendMetric": "Packets",
+          "legendAggregation": "Sum",
+          "itemColorSettings": {
+            "type": "heatmap",
+            "colorAggregation": "Sum",
+            "nodeColorField": "Packets",
+            "heatmapPalette": "greenRed"
+          }
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "AZFWApplicationRule"
+      },
+      "showPin": true,
+      "name": "AZFWApplicationRule-Summary"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWNetworkRule\r\n| where _ResourceId == \"{Firewall}\" or \"{Firewall}\" == \"Any\"\r\n| where Action == \"{Action}\" or \"{Action}\" == \"Any\"\r\n| where Protocol == \"{Protocol}\" or \"{Protocol}\" == \"Any\"\r\n| where DestinationPort == \"{Port}\" or \"{Port}\" == \"Any\"\r\n| where SourceIp == \"{SourceIp}\" or \"{SourceIp}\" == \"\"\r\n| where DestinationIp == \"{DestinationIp}\" or \"{DestinationIp}\" == \"\"\r\n| where DestinationPort == \"{DestinationPort}\" or \"{DestinationPort}\" == \"\"\r\n| where SourceIp == \"{NetRuleSourceIp}\" or \"{NetRuleSourceIp}\" == \"Any\"\r\n| where DestinationIp == \"{NetRuleDestinationIp}\" or \"{NetRuleDestinationIp}\" == \"Any\"\r\n| sort by TimeGenerated",
+        "size": 3,
+        "showAnalytics": true,
+        "title": "Details ({SelectedTab})",
+        "timeContextFromParameter": "TimeRange",
+        "showRefreshButton": true,
+        "showExportToExcel": true,
+        "exportToExcelOptions": "all",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "gridSettings": {
+          "rowLimit": 10,
+          "sortBy": [
+            {
+              "itemKey": "DestinationPort",
+              "sortOrder": 1
+            }
+          ]
+        },
+        "sortBy": [
+          {
+            "itemKey": "DestinationPort",
+            "sortOrder": 1
+          }
+        ]
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "AZFWNetworkRule"
+      },
+      "showPin": true,
+      "name": "AZFWNetworkRule-Details"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "AZFWApplicationRule\r\n| where _ResourceId == \"{Firewall}\" or \"{Firewall}\" == \"Any\"\r\n| where Action == \"{Action}\" or \"{Action}\" == \"Any\"\r\n| where Protocol == \"{Protocol}\" or \"{Protocol}\" == \"Any\"\r\n| where DestinationPort == \"{Port}\" or \"{Port}\" == \"Any\"\r\n| where SourceIp == \"{SourceIp}\" or \"{SourceIp}\" == \"\"\r\n| where Fqdn contains \"{Fqdn}\" or \"{Fqdn}\" == \"\"\r\n| where DestinationPort == \"{DestinationPort}\" or \"{DestinationPort}\" == \"\"\r\n| where SourceIp == \"{AppRuleSourceIp}\" or \"{AppRuleSourceIp}\" == \"Any\"\r\n| where Fqdn == \"{AppRuleFqdn}\" or \"{AppRuleFqdn}\" == \"Any\"\r\n| sort by TimeGenerated",
+        "size": 3,
+        "showAnalytics": true,
+        "title": "Details (AZFWApplicationRule)",
+        "timeContextFromParameter": "TimeRange",
+        "showRefreshButton": true,
+        "showExportToExcel": true,
+        "exportToExcelOptions": "all",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "crossComponentResources": [
+          "{Workspace}"
+        ],
+        "gridSettings": {
+          "rowLimit": 10
+        }
+      },
+      "conditionalVisibility": {
+        "parameterName": "SelectedTab",
+        "comparison": "isEqualTo",
+        "value": "AZFWApplicationRule"
+      },
+      "showPin": true,
+      "name": "AZFWApplicationRule-Details"
+    }
+  ],
+  "fallbackResourceIds": [
+    "azure monitor"
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}
